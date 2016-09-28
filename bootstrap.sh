@@ -102,7 +102,7 @@ if [ ! -f "/vagrant/httpdocs/app/etc/local.xml" ]; then
 fi
 
 
-
+# 安全起见，移除目录 '/srv/www/xgd/public_html/magento2/app/etc' 的写权限
 
 
 
