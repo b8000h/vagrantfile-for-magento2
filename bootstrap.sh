@@ -84,25 +84,25 @@ composer create-project --repository-url=https://repo.magento.com/  magento/proj
 # 写入
 /vagrant/.composer/auth.json
 
+
+# 设置目录的组
+#chown -R :www-data .
+
+# 目录内文件的权限
+find . -type d -exec chmod 770 {} \; && find . -type f -exec chmod 660 {} \; && chmod u+x bin/magento
+
+
 # Run installer
 if [ ! -f "/vagrant/httpdocs/app/etc/local.xml" ]; then
-  cd /vagrant/httpdocs
-  sudo /usr/bin/php -f install.php -- --license_agreement_accepted yes \
-  --locale en_US --timezone "America/Los_Angeles" --default_currency USD \
-  --db_host localhost --db_name magentodb --db_user magentouser --db_pass password \
-  --url "http://127.0.0.1:8080/" --use_rewrites yes \
-  --use_secure no --secure_base_url "http://127.0.0.1:8080/" --use_secure_admin no \
-  --skip_url_validation yes \
-  --admin_lastname Owner --admin_firstname Store --admin_email "admin@example.com" \
-  --admin_username admin --admin_password password123123
-  /usr/bin/php -f shell/indexer.php reindexall
+  php /vagrant/httpdocs/bin/magento setup:install --base-url=http://127.0.0.1/ \
+  --db-host=localhost --db-name=magentodb --db-user=magentouser --db-password=password \
+  --admin-firstname=Store --admin-lastname=Owner --admin-email=admin@example.com \
+  --admin-user=admin --admin-password=password123123 --language=en_US \
+  --currency=USD --timezone=America/Chicago --use-rewrites=1
 fi
 
-php /var/www/html/magento2/bin/magento setup:install --base-url=http://192.0.2.5/magento2/ \
---db-host=localhost --db-name=magento --db-user=mag --db-password=CarlInXGD2015 \
---admin-firstname=Magento --admin-lastname=User --admin-email=810455959@qq.com \
---admin-user=Carl --admin-password=CarlInXGD2015 --language=en_US \
---currency=USD --timezone=America/Chicago --use-rewrites=1
+
+
 
 
 
