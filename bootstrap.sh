@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 SAMPLE_DATA=$1
-MAGE_VERSION="1.9.2.4"
-DATA_VERSION="1.9.1.0"
 
 # Git for modman and Vundle
 apt-get -q -y install git
@@ -126,7 +124,7 @@ n98-magerun.phar dev:module:disable Mage_Connect
 n98-magerun.phar dev:module:disable Mage_Weee
 n98-magerun.phar dev:module:disable Phoenix_Moneybookers
 
-<<EOF
+:<<EOF
 cd /vagrant/httpdocs/app/etc/modules
 sed -e '49,0s/true/false/' -i Mage_All.xml
 sed -e '77,0s/true/false/' -i Mage_All.xml
